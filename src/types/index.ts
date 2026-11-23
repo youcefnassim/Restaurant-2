@@ -110,6 +110,9 @@ export interface Product {
   sort_order: number;
   variants?: ProductVariant[];
   extras?: ProductExtra[];
+  has_ar?: boolean;
+  model_3d_url?: string;
+  dish_diameter_cm?: number;
   created_at: string;
   updated_at: string;
 }

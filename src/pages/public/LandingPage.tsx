@@ -18,6 +18,7 @@ import {
   Store,
   Printer,
   Zap,
+  Camera,
 } from 'lucide-react';
 import { Navbar } from '../../components/common/Navbar';
 import { Footer } from '../../components/common/Footer';
@@ -377,6 +378,20 @@ export const LandingPage: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Feature: AR 3D Table View */}
+            <div className="bg-gradient-to-br from-primary/10 via-white to-white p-7 rounded-2xl border-2 border-primary/30 shadow-md hover:shadow-xl transition-all duration-300 relative overflow-hidden">
+              <div className="absolute top-3 right-3 bg-primary text-white text-[9px] font-black uppercase px-2 py-0.5 rounded-full">
+                Exclusivité
+              </div>
+              <div className="w-12 h-12 rounded-xl bg-primary text-white flex items-center justify-center mb-5 shadow-lg shadow-primary/25">
+                <Camera className="w-6 h-6" />
+              </div>
+              <h4 className="text-lg font-bold text-secondary mb-2">Voir le plat sur sa table (AR 3D)</h4>
+              <p className="text-sm text-text-muted leading-relaxed">
+                Vos clients projettent le plat directement sur leur table physique en Réalité Augmentée à l'échelle réelle (1:1) grâce à la caméra de leur smartphone avant de commander !
+              </p>
+            </div>
+
             {/* Feature 1 */}
             <div className="bg-white p-7 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md hover:border-primary/30 transition-all duration-300">
               <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-5">

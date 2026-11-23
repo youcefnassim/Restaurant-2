@@ -13,6 +13,10 @@
 
 2. **Menu Digital Public Exceptionnel (`/menu/:slug`) :**
    - Aucune application requise pour les clients, ouverture instantanée dans le navigateur mobile.
+   - **📱 Visualisation Réalité Augmentée (AR 3D sur Table) :**
+     - Permet aux clients de projeter le plat directement sur leur table réelle en 1:1 via la caméra de leur smartphone.
+     - Contrôles tactiles de déplacement, rotation 360°, ombre portée réaliste et capture photo sur table.
+     - Prise en charge WebXR / Google Scene Viewer (Android) & Apple Quick Look (iOS) + Studio 3D 360°.
    - **Trilingue natif :** Français, Arabe avec support complet **RTL** (`dir="rtl"` et police Cairo), Anglais.
    - Recherche instantanée, carrousel horizontal des catégories avec badges, photographies culinaires HD.
    - Drawer de personnalisation de plat : Choix des tailles/portions (variantes de prix) et suppléments payants (fromage, sauce...).

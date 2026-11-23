@@ -361,6 +361,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     price: 2400,
     is_available: true,
     is_popular: true,
+    has_ar: true,
+    dish_diameter_cm: 30,
     prep_time_minutes: 25,
     sort_order: 1,
     variants: [
@@ -389,6 +391,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     price: 1800,
     is_available: true,
     is_popular: true,
+    has_ar: true,
+    dish_diameter_cm: 26,
     prep_time_minutes: 20,
     sort_order: 2,
     variants: [
@@ -539,6 +543,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     price: 1350,
     is_available: true,
     is_popular: true,
+    has_ar: true,
+    dish_diameter_cm: 22,
     prep_time_minutes: 12,
     sort_order: 1,
     variants: [

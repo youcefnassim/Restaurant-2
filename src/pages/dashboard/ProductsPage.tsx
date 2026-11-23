@@ -19,6 +19,7 @@ import {
   Sliders,
   Layers,
   Sparkles,
+  Camera,
 } from 'lucide-react';
 
 export const ProductsPage: React.FC = () => {
@@ -50,6 +51,8 @@ export const ProductsPage: React.FC = () => {
   const [imageUrl, setImageUrl] = useState('');
   const [isAvailable, setIsAvailable] = useState(true);
   const [isPopular, setIsPopular] = useState(false);
+  const [hasAr, setHasAr] = useState(true);
+  const [dishDiameter, setDishDiameter] = useState('28');
   const [prepTime, setPrepTime] = useState('15');
   const [sortOrder, setSortOrder] = useState('1');
 
@@ -72,6 +75,8 @@ export const ProductsPage: React.FC = () => {
     setImageUrl('https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80');
     setIsAvailable(true);
     setIsPopular(false);
+    setHasAr(true);
+    setDishDiameter('28');
     setPrepTime('15');
     setSortOrder((products.length + 1).toString());
     setVariants([]);
@@ -90,6 +95,8 @@ export const ProductsPage: React.FC = () => {
     setImageUrl(p.image_url);
     setIsAvailable(p.is_available);
     setIsPopular(p.is_popular);
+    setHasAr(p.has_ar !== false);
+    setDishDiameter((p.dish_diameter_cm || 28).toString());
     setPrepTime(p.prep_time_minutes?.toString() || '15');
     setSortOrder(p.sort_order.toString());
     setVariants(p.variants?.map((v) => ({ name: v.name, name_ar: v.name_ar, price_adjustment: v.price_adjustment, is_default: v.is_default })) || []);
@@ -161,6 +168,8 @@ export const ProductsPage: React.FC = () => {
         image_url: imageUrl,
         is_available: isAvailable,
         is_popular: isPopular,
+        has_ar: hasAr,
+        dish_diameter_cm: parseInt(dishDiameter) || 28,
         prep_time_minutes: parseInt(prepTime) || 15,
         sort_order: parseInt(sortOrder) || 1,
         variants: formattedVariants,
@@ -178,6 +187,8 @@ export const ProductsPage: React.FC = () => {
         image_url: imageUrl,
         is_available: isAvailable,
         is_popular: isPopular,
+        has_ar: hasAr,
+        dish_diameter_cm: parseInt(dishDiameter) || 28,
         prep_time_minutes: parseInt(prepTime) || 15,
         sort_order: parseInt(sortOrder) || 1,
         variants: formattedVariants,
@@ -293,6 +304,12 @@ export const ProductsPage: React.FC = () => {
                       <span className="text-[10px] font-extrabold bg-amber-500 text-white px-2 py-1 rounded-lg flex items-center gap-1 shadow-xs">
                         <Star className="w-3 h-3 fill-white" />
                         <span>Populaire</span>
+                      </span>
+                    )}
+                    {p.has_ar !== false && (
+                      <span className="text-[10px] font-extrabold bg-primary text-white px-2 py-1 rounded-lg flex items-center gap-1 shadow-xs">
+                        <Camera className="w-3 h-3" />
+                        <span>AR 3D Table</span>
                       </span>
                     )}
                   </div>
@@ -535,7 +552,7 @@ export const ProductsPage: React.FC = () => {
               </div>
 
               {/* Status and toggles */}
-              <div className="flex flex-wrap gap-6 p-4 bg-bg rounded-2xl border border-gray-100">
+              <div className="flex flex-wrap items-center gap-6 p-4 bg-bg rounded-2xl border border-gray-100">
                 <label className="flex items-center gap-2 cursor-pointer text-xs font-bold text-secondary">
                   <input
                     type="checkbox"
@@ -558,6 +575,32 @@ export const ProductsPage: React.FC = () => {
                     <span>Mettre en avant (Badge Populaire)</span>
                   </span>
                 </label>
+
+                <label className="flex items-center gap-2 cursor-pointer text-xs font-bold text-secondary">
+                  <input
+                    type="checkbox"
+                    checked={hasAr}
+                    onChange={(e) => setHasAr(e.target.checked)}
+                    className="w-4 h-4 text-primary rounded"
+                  />
+                  <span className="flex items-center gap-1 text-primary">
+                    <Camera className="w-3.5 h-3.5" />
+                    <span>Activer Réalité Augmentée (AR 3D sur table)</span>
+                  </span>
+                </label>
+
+                {hasAr && (
+                  <div className="flex items-center gap-2 text-xs">
+                    <span className="text-gray-500 font-semibold">Diamètre réel assiette :</span>
+                    <input
+                      type="number"
+                      value={dishDiameter}
+                      onChange={(e) => setDishDiameter(e.target.value)}
+                      className="w-16 px-2 py-1 border border-gray-200 rounded-lg text-xs"
+                    />
+                    <span className="text-gray-400">cm</span>
+                  </div>
+                )}
               </div>
 
               {/* Variants Section */}

@@ -5,6 +5,7 @@ import { useCart } from '../../context/CartContext';
 import { Product, Category, Restaurant, RestaurantTheme } from '../../types';
 import { ProductDetailModal } from '../../components/menu/ProductDetailModal';
 import { CartDrawer } from '../../components/menu/CartDrawer';
+import { FoodARViewerModal } from '../../components/menu/FoodARViewerModal';
 import {
   Search,
   MapPin,
@@ -21,6 +22,7 @@ import {
   X,
   AlertCircle,
   ShoppingBag,
+  Camera,
 } from 'lucide-react';
 
 export const MenuPage: React.FC = () => {
@@ -37,6 +39,7 @@ export const MenuPage: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [activeModalProduct, setActiveModalProduct] = useState<Product | null>(null);
+  const [arProduct, setArProduct] = useState<Product | null>(null);
   const [infoModalOpen, setInfoModalOpen] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
 
@@ -369,6 +372,19 @@ export const MenuPage: React.FC = () => {
                             <span>{language === 'ar' ? 'الأكثر طلباً' : 'Populaire'}</span>
                           </span>
                         )}
+                        {/* Direct AR Button */}
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setArProduct(product);
+                          }}
+                          className="bg-primary/95 hover:bg-primary text-white text-[10px] font-black px-2.5 py-0.5 rounded-full flex items-center gap-1 shadow-md backdrop-blur-md transition hover:scale-105 active:scale-95"
+                          title={language === 'ar' ? 'عرض على الطاولة بالواقع المعزز' : 'Voir sur ma table (AR 3D)'}
+                        >
+                          <Camera className="w-3 h-3" />
+                          <span>3D AR</span>
+                        </button>
                         {!isAvailable && (
                           <span className="bg-red-600 text-white text-[10px] font-black px-2.5 py-0.5 rounded-full shadow-md">
                             {language === 'ar' ? 'غير متوفر حالياً' : 'Épuisé'}
@@ -451,6 +467,16 @@ export const MenuPage: React.FC = () => {
         isOrderingEnabled={restaurant.is_ordering_enabled}
         language={language}
       />
+
+      {/* Direct Food AR Table Viewer Modal */}
+      {arProduct && (
+        <FoodARViewerModal
+          product={arProduct}
+          onClose={() => setArProduct(null)}
+          currency={restaurant.currency}
+          language={language}
+        />
+      )}
 
       {/* Cart Drawer for WhatsApp checkout */}
       {restaurant.is_ordering_enabled && (
